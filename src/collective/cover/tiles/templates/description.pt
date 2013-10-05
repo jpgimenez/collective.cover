@@ -5,7 +5,7 @@
       i18n:domain="collective.cover">
 
 <body>
-  <h1 tal:content="view/render_field|nothing">
-  </h1>
+  <p class="documentDescription description" tal:content="view/render_field|nothing">
+  </p>
 </body>
 </html>

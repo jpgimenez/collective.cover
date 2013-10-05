@@ -67,8 +67,12 @@ class BasicTile(PersistentCoverTile):
     implements(IPersistentCoverTile)
 
     index = ViewPageTemplateFile("templates/basic.pt")
+    field_name = 'title'
 
-    is_configurable = True
+    is_configurable = False
+
+    def render_field(self):
+        return getattr(self.context, self.field_name)
 
     @memoizedproperty
     def brain(self):
@@ -137,3 +141,37 @@ class BasicTile(PersistentCoverTile):
         registry = getUtility(IRegistry)
         settings = registry.forInterface(ICoverSettings)
         return settings.searchable_content_types
+
+
+class DescriptionTile(BasicTile):
+
+    implements(IPersistentCoverTile)
+
+    index = ViewPageTemplateFile("templates/description.pt")
+    field_name = 'description'
+
+    is_configurable = False
+
+
+class AuthorTile(BasicTile):
+
+    implements(IPersistentCoverTile)
+
+    index = ViewPageTemplateFile("templates/basic.pt")
+    field_name = 'author'
+
+    is_configurable = False
+
+class TextTile(BasicTile):
+
+    implements(IPersistentCoverTile)
+
+    index = ViewPageTemplateFile("templates/text.pt")
+    field_name = 'text'
+
+    is_configurable = False
+
+    def render_field(self):
+        text = getattr(self.context, self.field_name)
+        if text:
+            return text.output

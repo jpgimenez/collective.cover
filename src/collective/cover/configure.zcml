@@ -82,4 +82,10 @@
         />
   </browser:menuItems>
 
+  <plone:behavior
+        title="Editable layout"
+        description="Dexterity behavior to enable editable layouts for contenttypes."
+        provides=".content.ICover"
+        />
+
 </configure>

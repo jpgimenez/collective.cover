@@ -15,6 +15,9 @@ from zope.schema.interfaces import IVocabularyFactory
 import json
 
 
+DEFAULT_LAYOUT = u'[{"type": "row", "children": [{"data": {"layout-type": "column", "column-size": 16}, "type": "group", "children": [{"tile-type": "collective.cover.title", "type": "tile", "id": "09404a7079b84a13bac6cfc52354a4f5"}, {"tile-type": "collective.cover.description", "type": "tile", "id": "d78b97a72dfc4bf6ac1ae26136f23835"}, {"tile-type": "collective.cover.text", "type": "tile", "id": "1009d9b89db141f7841d822b71f2ea91"}], "roles": ["Manager"], "id": "group1"}]}]'
+
+
 class PageLayout(grok.View):
     """
     Renders a layout for the cover object.
@@ -30,7 +33,10 @@ class PageLayout(grok.View):
     generalmarkup = ViewPageTemplateFile('layout_templates/generalmarkup.pt')
 
     def get_layout(self, mode):
-        layout = json.loads(self.context.cover_layout)
+        layout = getattr(self.context, 'cover_layout')
+        if not layout:
+            layout = DEFAULT_LAYOUT
+        layout = json.loads(layout)
 
         if mode == 'view' or mode == 'compose':
             grid_plug = getMultiAdapter((self.context, self.request),

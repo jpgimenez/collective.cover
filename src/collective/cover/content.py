@@ -48,7 +48,7 @@ class Cover(Item):
 class View(grok.View):
     grok.context(ICover)
     grok.require('zope2.View')
-    grok.name('view')
+    grok.name('layoutview')
 
 
 class Standard(grok.View):

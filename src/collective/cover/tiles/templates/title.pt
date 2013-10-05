@@ -4,8 +4,8 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       i18n:domain="collective.cover">
 
-<body tal:define="text_field view/render_field">
-  <span tal:replace="structure text_field/output">
-  </span>
+<body>
+  <h1 tal:content="view/render_field|nothing">
+  </h1>
 </body>
 </html>

@@ -11,11 +11,11 @@ from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility
+from collective.cover.controlpanel import ICoverSettings
 
 import json
-
-
-DEFAULT_LAYOUT = u'[{"type": "row", "children": [{"data": {"layout-type": "column", "column-size": 16}, "type": "group", "children": [{"tile-type": "collective.cover.title", "type": "tile", "id": "09404a7079b84a13bac6cfc52354a4f5"}, {"tile-type": "collective.cover.description", "type": "tile", "id": "d78b97a72dfc4bf6ac1ae26136f23835"}, {"tile-type": "collective.cover.text", "type": "tile", "id": "1009d9b89db141f7841d822b71f2ea91"}], "roles": ["Manager"], "id": "group1"}]}]'
 
 
 class PageLayout(grok.View):
@@ -35,7 +35,12 @@ class PageLayout(grok.View):
     def get_layout(self, mode):
         layout = getattr(self.context, 'cover_layout')
         if not layout:
-            layout = DEFAULT_LAYOUT
+            registry = getUtility(IRegistry)
+            settings = registry.forInterface(ICoverSettings)
+            if self.context.portal_type in settings.layouts:
+                layout = settings.layouts[self.context.portal_type]
+            else:
+                layout = settings.layouts['Empty layout']
         layout = json.loads(layout)
 
         if mode == 'view' or mode == 'compose':

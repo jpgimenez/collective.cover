@@ -151,49 +151,12 @@
       />
 
   <plone:tile
-      name="collective.cover.title"
-      title="Title Tile"
-      description="A tile that shows the title of objects."
+      name="collective.cover.field"
+      title="Field Tile"
+      description="A tile that renders the field assigned in the id."
       icon="++resource++collective.cover/tile-basic.png"
       add_permission="cmf.ModifyPortalContent"
-      schema=".basic.IBasicTile"
-      class=".basic.BasicTile"
-      permission="zope2.View"
-      for="*"
-      />
-
-  <plone:tile
-      name="collective.cover.description"
-      title="Description Tile"
-      description="A tile that shows the description of objects."
-      icon="++resource++collective.cover/tile-basic.png"
-      add_permission="cmf.ModifyPortalContent"
-      schema=".basic.IBasicTile"
-      class=".basic.DescriptionTile"
-      permission="zope2.View"
-      for="*"
-      />
-
-  <plone:tile
-      name="collective.cover.text"
-      title="Text Tile"
-      description="A tile that shows the text of objects."
-      icon="++resource++collective.cover/tile-richtext.png"
-      add_permission="cmf.ModifyPortalContent"
-      schema=".basic.IBasicTile"
-      class=".basic.TextTile"
-      permission="zope2.View"
-      for="*"
-      />
-
-  <plone:tile
-      name="collective.cover.author"
-      title="Author Tile"
-      description="A tile that shows the author of objects."
-      icon="++resource++collective.cover/tile-basic.png"
-      add_permission="cmf.ModifyPortalContent"
-      schema=".basic.IBasicTile"
-      class=".basic.AuthorTile"
+      class=".field.BasicTile"
       permission="zope2.View"
       for="*"
       />

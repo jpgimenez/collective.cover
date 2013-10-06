@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import zope.event
 from collective.cover import _
 from collective.cover.controlpanel import ICoverSettings
 from plone.tiles import Tile
@@ -30,6 +31,7 @@ from plone.behavior.interfaces import IBehavior
 from plone.dexterity.utils import iterSchemata
 from zope.interface import alsoProvides
 from zope.pagetemplate.interfaces import IPageTemplate
+from z3c.form.widget import AfterWidgetUpdateEvent
 
 
 class BasicTile(Tile):
@@ -64,6 +66,7 @@ class BasicTile(Tile):
         widget.context = self.context
         alsoProvides(widget, interfaces.IContextAware)
         widget.update()
+        zope.event.notify(AfterWidgetUpdateEvent(widget))
         return widget
 
     def get_tile_configuration(self):

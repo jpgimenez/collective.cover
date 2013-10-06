@@ -22,6 +22,7 @@ from zope.component import getUtility
 from zope.container.interfaces import IObjectAddedEvent
 from zope.event import notify
 from zope.interface import implements
+from Products.CMFCore.interfaces import IDublinCore
 
 import json
 
@@ -48,7 +49,7 @@ class Cover(Item):
 class View(grok.View):
     grok.context(ICover)
     grok.require('zope2.View')
-    grok.name('layoutview')
+    grok.name('layout_view')
 
 
 class Standard(grok.View):

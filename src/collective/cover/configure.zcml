@@ -88,4 +88,12 @@
         provides=".content.ICover"
         />
 
+  <browser:menuItem
+        for=".content.ICover"
+        menu="plone_displayviews"
+        title="Layout View"
+        action="@@layout_view"
+        description=""
+        />
+
 </configure>
